@@ -1,4 +1,5 @@
 import pytest 
+import time 
 
 from rest_api import Person 
 
@@ -14,4 +15,8 @@ def test_check_object_person(add_person):
     p = add_person
     
     assert p.name == "ali"
+    
+def test_waiting():
+    time.sleep(10)
+    assert True 
     
