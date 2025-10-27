@@ -1,19 +1,24 @@
-on : [push]
+name: Run Tests
+
+on: [push]
 
 jobs:
   tests:
-    
     runs-on: ubuntu-latest
 
     steps:
-    - name : checkout code 
-      run : git clone git@github.com:ali-talebi/learning_cicd.git
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    - name: install python and pip 
-      run : sudo apt-get update && sudo apt-get install -y python3 python3-pip 
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'  # یا نسخه خاصی مثل '3.10'
 
-    - name: install dependency 
-      run: pip install requirements.txt 
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-    - name: run tests 
-      run : pytest -v -s 
+    - name: Run tests
+      run: pytest -v -s
